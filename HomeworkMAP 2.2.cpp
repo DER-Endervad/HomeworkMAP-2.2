@@ -27,8 +27,8 @@ void flow() {
     SetConsoleTextAttribute(console, 15);
     gotoxy(0, 0); std::cout << "#";
     gotoxy(3, 0); std::cout << "id";
-    gotoxy(25, 0); std::cout << "Progress Bar";
-    gotoxy(40, 0); std::cout << "Time";
+    gotoxy(15, 0); std::cout << "Progress Bar";
+    gotoxy(30, 0); std::cout << "Time";
 
     int size_t = 5;
     std::thread* t = new std::thread[size_t];
@@ -49,12 +49,12 @@ void print_flow(int y, HANDLE console) {
 
     m.lock();
     gotoxy(3, y + 1);
-    std::cout << std::this_thread::get_id << std::endl;
+    std::cout << std::this_thread::get_id();
     m.unlock();
 
     m.lock();
     for (int i = 0; i < 9; i++) {
-        gotoxy(26+i, y + 1);
+        gotoxy(16+i, y + 1);
         SetConsoleTextAttribute(console, 10);
         printf("-");
     }
@@ -75,13 +75,13 @@ void print_flow(int y, HANDLE console) {
     SetConsoleTextAttribute(console, 15);
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::milli> time = end - start;
-    gotoxy(40, 1+y); std::cout << time.count();
+    gotoxy(30, 1+y); std::cout << time.count();
     m.unlock();
 }
 
 void print_flow2(int y, HANDLE console, int x) {
     m.lock();
-    gotoxy(26 + x, y + 1);
+    gotoxy(16 + x, y + 1);
     SetConsoleTextAttribute(console, 12);
     std::cout << "-";
     Sleep(200);
